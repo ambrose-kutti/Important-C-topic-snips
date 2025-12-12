@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int maxProfit(int prices[], int n) 
+{
+    int max_profit = 0;  // Initialize the maximum profit to zero
+    printf("Starting max profit calculation with array size n = %d\n", n); // Trace start
+    for (int i = 1; i < n; ++i)
+    {
+        printf("Day %d (price: %d) vs Day %d (price: %d)\n", i, prices[i], i-1, prices[i-1]); // Trace current day vs previous
+        // If the current price is higher than the previous day's price, add to the profit
+        if (prices[i] > prices[i - 1]) 
+        {
+            int profit_today = prices[i] - prices[i-1];
+            max_profit += profit_today;
+            printf("  Price increased! Adding profit of %d. Total max_profit is now: %d\n", profit_today, max_profit); // Trace profit addition
+        } else {
+            printf("  Price decreased or stayed the same. No profit added today.\n"); // Trace no profit
+        }
+    }
+    printf("Finished calculation. Final max profit: %d\n", max_profit); // Trace final result
+    return max_profit;
+}
+
+int main()
+ {
+    int n;
+    printf("Enter number of days (n): "); // Prompt user for input
+    scanf("%d", &n);
+   
+    int prices[n];
+    printf("Enter prices for %d days, separated by spaces or newlines: ", n); // Prompt user for prices
+    for (int i = 0; i < n; ++i) 
+     {
+        scanf("%d", &prices[i]);
+    }
+   
+    int result = maxProfit(prices, n);
+    printf("Result returned to main: %d\n", result); // Final output from main
+    
+    return 0;
+}
